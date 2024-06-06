@@ -1,5 +1,7 @@
 package string;
 
+import java.util.Arrays;
+
 public class Anagram {
 
     public static void main(String[] args) {
@@ -8,14 +10,19 @@ public class Anagram {
         System.out.println(isAnagram(s, t));
     }
 
-    private static boolean isAnagram(String s, String t) {
+    static boolean isAnagram(String s, String t) {
         if(s.isEmpty() || t.isEmpty())
             return false;
         if(s.length() != t.length())
             return false;
-        for (int i = 0; i < s.length(); i++) {
-            if(!t.contains(String.valueOf(s.charAt(i))))
-                return false;
+        var sCharArray = s.toCharArray();
+        var tCharArray = t.toCharArray();
+        Arrays.sort(sCharArray);
+        Arrays.sort(tCharArray);
+        String sSortedAnagram = String.valueOf(sCharArray);
+        String tSortedAnagram = String.valueOf(tCharArray);
+        if(!sSortedAnagram.equals(tSortedAnagram)){
+            return false;
         }
         return true;
     }
